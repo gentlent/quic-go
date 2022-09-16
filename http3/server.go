@@ -208,12 +208,11 @@ func (s *Server) ListenAndServe() error {
 //
 // If s.Addr is blank, ":https" is used.
 func (s *Server) ListenAndServeTLS(certFile, keyFile string) error {
-	var err error
 	certs := make([]tls.Certificate, 1)
-	certs[0], err = tls.LoadX509KeyPair(certFile, keyFile)
-	if err != nil {
+	certs[0], _ = tls.LoadX509KeyPair(certFile, keyFile)
+	/* if err != nil {
 		return err
-	}
+	} */
 	// We currently only use the cert-related stuff from tls.Config,
 	// so we don't need to make a full copy.
 	config := &tls.Config{

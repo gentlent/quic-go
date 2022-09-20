@@ -207,18 +207,18 @@ func (s *Server) ListenAndServe() error {
 // ListenAndServeTLS listens on the UDP address s.Addr and calls s.Handler to handle HTTP/3 requests on incoming connections.
 //
 // If s.Addr is blank, ":https" is used.
-func (s *Server) ListenAndServeTLS(certFile, keyFile string) error {
-	certs := make([]tls.Certificate, 1)
+func (s *Server) ListenAndServeTLS() error {
+	/* certs := make([]tls.Certificate, 1)
 	certs[0], _ = tls.LoadX509KeyPair(certFile, keyFile)
-	/* if err != nil {
+	 if err != nil {
 		return err
 	} */
 	// We currently only use the cert-related stuff from tls.Config,
 	// so we don't need to make a full copy.
-	config := &tls.Config{
+	/*config := &tls.Config{
 		Certificates: certs,
-	}
-	return s.serveConn(config, nil)
+	}*/
+	return s.serveConn(s.TLSConfig, nil)
 }
 
 // Serve an existing UDP connection.

@@ -658,7 +658,7 @@ func ListenAndServeQUIC(addr, certFile, keyFile string, handler http.Handler) er
 		Addr:    addr,
 		Handler: handler,
 	}
-	return server.ListenAndServeTLS(certFile, keyFile)
+	return server.ListenAndServeTLS()
 }
 
 // ListenAndServe listens on the given network address for both, TLS and QUIC
